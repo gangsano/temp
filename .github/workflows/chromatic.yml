@@ -3,13 +3,18 @@ name: "Chromatic"
 on:
   pull_request:
     branches:
-      - main
+      - '**'
 
 jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel job if 'block-chromatic' label exists
+          if: contains(github.event.pull_request.labels.*.name, 'block-chromatic')
+          run: |
+            echo "PR has 'block-chromatic' label. Exiting."
+            exit 1
       - name: Checkout code
         uses: actions/checkout@v4
         with:

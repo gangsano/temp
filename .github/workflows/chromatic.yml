@@ -2,7 +2,7 @@ name: "Chromatic"
 
 on:
   pull_request:
-    type: [opened, reopened]
+    types: [opened, reopened]
 
 jobs:
   chromatic:
